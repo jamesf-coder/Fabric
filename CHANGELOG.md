@@ -1,5 +1,45 @@
 # Changelog
 
+## v1.4.507 (2026-10-03)
+
+### PR [#2173](https://github.com/danielmiessler/Fabric/pull/2173) by [OdinKral](https://github.com/OdinKral) and [ksylvan](https://github.com/ksylvan): fix: clearer error when binary name used as pattern fallback
+
+- Added a clearer error hint when a pattern is derived from the binary name, explaining that the executable name was used as a fallback and how to specify a pattern explicitly with `-p`.
+- Introduced a `patternFromBinaryName()` helper and explicit tracking of binary-derived pattern names during flag initialization, so fallback hints appear only when a pattern truly came from the binary name.
+- Prevented `fabric-ai` from automatically selecting a pattern by binary name by centralizing the list of executable names that do not trigger pattern selection.
+- Added the `pattern_from_binary_name_hint` key with localized text across all ten non-English locale files for a consistent i18n bundle.
+- Simplified error wrapping, removed obsolete detection tests, and added coverage for default executable exclusion and extension-stripped pattern selection.
+
+### Direct commits
+
+- Merge branch 'main' into docs/sync-chinese-readme
+
+## v1.4.506 (2026-10-03)
+
+OpenAI Get "https://api.openai.com/v1/models": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+### PR [#2249](https://github.com/danielmiessler/Fabric/pull/2249) by [ksylvan](https://github.com/ksylvan): fix: respect user subtitle language arguments in yt-dlp
+
+- Fixed yt-dlp handling so user-specified subtitle language arguments are respected.
+- Skipped built-in language filters whenever users supply their own subtitle languages.
+- Preserved user arguments when retrying downloads without the built-in language filters.
+- Added tests covering language defaults, user overrides, and empty language selections.
+
+## v1.4.505 (2026-10-01)
+
+### PR [#2225](https://github.com/danielmiessler/Fabric/pull/2225) by [aiapienthusiast](https://github.com/aiapienthusiast): feat(providers): add Cheaper Inference as an OpenAI-compatible provider
+
+- Feat(providers): add Cheaper Inference as an OpenAI-compatible provider
+
+## v1.4.504 (2026-10-01)
+
+### PR [#2221](https://github.com/danielmiessler/Fabric/pull/2221) by [jamesf-coder](https://github.com/jamesf-coder) and [ksylvan](https://github.com/ksylvan): feat: add OpenCode Zen and Go vendors with session routing
+
+- Added OpenCode Zen and OpenCode Go vendors with support for session routing.
+- Simplified session ID handling by replacing UUID generation with `crypto/rand.Text` and dropping the UUID dependency.
+- Preserved existing session IDs and gave preference to named sessions.
+- Standardized the User-Agent value for both OpenCode providers to `fabric`.
+- Removed the version detection utilities and their associated tests.
+
 ## v1.4.503 (2026-10-01)
 
 ### PR [#2218](https://github.com/danielmiessler/Fabric/pull/2218) by [DennyHo0917](https://github.com/DennyHo0917): feat(providers): add API Route as an OpenAI-compatible provider
